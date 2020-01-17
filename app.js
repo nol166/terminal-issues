@@ -1,9 +1,5 @@
-const https = require('https');
-const add = require('/Users/johnmccambridge/Documents/coding stuff/projects/git-issues/src/add.js');
+const add = require('src/add.js');
 const cli = require('commander');
-const inquirer = require('inquirer');
-const chalk = require('chalk');
-const fs = require('fs');
 
 
 cli
