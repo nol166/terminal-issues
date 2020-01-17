@@ -3,7 +3,6 @@ const chalk = require('chalk');
 const fs = require('fs');
 
 
-
 let questions = [{
     type: 'input',
     name: 'org',
@@ -31,7 +30,7 @@ let questions = [{
     ],
 }]
 
-module.exports = () => {
+module.exports = function () {
     console.log('Hi, welcome to Git Issues');
     inquirer
         .prompt(questions)
@@ -42,7 +41,7 @@ module.exports = () => {
             }
 
             if (answers.save[0] === 'Yes') {
-                fs.readFile('../repos.json', function (err, data) {
+                fs.readFile('repos.json', function (err, data) {
                     var json = JSON.parse(data)
                     if (json.includes(queryURL)) {
                         console.log("Repository is a duplicate, not saving")
@@ -50,7 +49,7 @@ module.exports = () => {
                     }
                     json.push(queryURL)
 
-                    fs.writeFile("../repos.json", JSON.stringify(json), (err, result) => {
+                    fs.writeFile("repos.json", JSON.stringify(json), (err, result) => {
                         if (err) {
                             console.log("Save error", err)
                         }

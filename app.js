@@ -1,5 +1,5 @@
-const add = require('src/add.js');
 const cli = require('commander');
+const add = require('./src/add');
 
 
 cli
