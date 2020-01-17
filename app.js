@@ -57,8 +57,6 @@ inquirer
                 })
             })
         }
-        // console.log(queryURL)
-        // console.log(answers.save)
     });
 
 
