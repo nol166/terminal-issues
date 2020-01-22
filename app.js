@@ -1,22 +1,19 @@
 const cli = require('commander');
 const add = require('./src/add');
+const list = require('./src/list');
 
 
 cli
     .command('add') // sub-command name
     .alias('a') // alternative sub-command is `al`
     .description('add a repository') // command description
+    .action(() => add());  // function to execute when command is uses
 
-    // function to execute when command is uses
-    .action(function () {
-        add();
-    });
-
-// .description('get issues for a specific repository')
-// .option('-a', '--add', 'add a repository')
-// .option('-l', '--list', 'list saved repositories')
-// .option('-f', '--format', 'modify formatting options')
-// .option('-g', '--get <organiztion> <repository>', 'get issues for a specific repository', 'github name', 'repository name')
+cli
+    .command('list')
+    .alias('l')
+    .description('list saved repositories')
+    .action(() => list())
 
 cli.parse(process.argv)
 

@@ -20,7 +20,6 @@ let questions = [{
     message: 'Would you like to save this repository?',
     name: 'save',
     choices: [
-        // new inquirer.Separator(' = The Meats = '),
         {
             name: 'Yes'
         },
@@ -30,7 +29,7 @@ let questions = [{
     ],
 }]
 
-module.exports = function () {
+module.exports = () => {
     console.log('Hi, welcome to Git Issues');
     inquirer
         .prompt(questions)
@@ -41,7 +40,7 @@ module.exports = function () {
             }
 
             if (answers.save[0] === 'Yes') {
-                fs.readFile('repos.json', function (err, data) {
+                fs.readFile('repos.json', (data) => {
                     var json = JSON.parse(data)
                     if (json.includes(queryURL)) {
                         console.log("Repository is a duplicate, not saving")
@@ -49,7 +48,7 @@ module.exports = function () {
                     }
                     json.push(queryURL)
 
-                    fs.writeFile("repos.json", JSON.stringify(json), (err, result) => {
+                    fs.writeFile("repos.json", JSON.stringify(json), err => {
                         if (err) {
                             console.log("Save error", err)
                         }
