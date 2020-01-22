@@ -35,18 +35,26 @@ module.exports = () => {
         .prompt(questions)
         .then(answers => {
             let queryURL = `https://api.github.com/repos/${answers.org}/${answers.repo}/issues`
+            let repo = {
+                queryURL: queryURL,
+                organization: answers.org,
+                repo: answers.repo,
+            }
             if (answers.save.length === 0) {
                 answers.save = ['No']
             }
 
             if (answers.save[0] === 'Yes') {
-                fs.readFile('repos.json', (data) => {
+                fs.readFile('repos.json', (err, data) => {
+                    if (err) {
+                        console.log(err)
+                    }
                     var json = JSON.parse(data)
                     if (json.includes(queryURL)) {
                         console.log("Repository is a duplicate, not saving")
                         return
                     }
-                    json.push(queryURL)
+                    json.push(repo)
 
                     fs.writeFile("repos.json", JSON.stringify(json), err => {
                         if (err) {

@@ -1,11 +1,12 @@
 const cli = require('commander');
 const add = require('./src/add');
 const list = require('./src/list');
+const grab = require('./src/grab');
 
 
 cli
     .command('add') // sub-command name
-    .alias('a') // alternative sub-command is `al`
+    .alias('a') // alternative sub-command is `a`
     .description('add a repository') // command description
     .action(() => add());  // function to execute when command is uses
 
@@ -23,14 +24,3 @@ cli.parse(process.argv)
 // if (cli.get) console.log(`- get issues`);
 
 
-// https.get('https://encrypted.google.com/', (res) => {
-//     console.log('statusCode:', res.statusCode);
-//     console.log('headers:', res.headers);
-
-//     res.on('data', (d) => {
-//         process.stdout.write(d);
-//     });
-
-// }).on('error', (e) => {
-//     console.error(e);
-// });
