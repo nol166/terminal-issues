@@ -14,10 +14,12 @@ module.exports = () => {
         json.forEach(repo => {
             repos.push(repo.repo)
         });
+        console.log(repos)
         inquirer
             .prompt({ type: 'list', name: 'repoChoice', message: 'Choose saved repo', choices: repos })
             .then(function (choice) {
                 console.log(choice)
+                grab.grabIssues("microsoft", "vscode")
                 // grab.grabIssues(choice.repoChoice)
             })
     })
