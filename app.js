@@ -16,6 +16,12 @@ cli
     .description('list saved repositories')
     .action(() => list())
 
+cli
+    .command('grab')
+    .alias('g')
+    .description('get issues for a specific repository')
+    .action(() => grab())
+
 cli.parse(process.argv)
 
 // if (cli.add) console.log(cli.add());

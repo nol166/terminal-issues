@@ -1,17 +1,13 @@
 const https = require('https');
 
-
-
 function grabIssues(org, repo) {
     let options = {
         hostname: 'api.github.com',
         port: 443,
-        json: true,
         headers: {
-            'Content-Type': 'application/json',
-            'User-agent': 'terminal isssues CLI'
+            'User-agent': 'terminal-isssues'
         },
-        path: '/repos/' + org + '/' + repo,
+        path: '/repos/' + org + '/' + repo + "/issues",
         method: 'GET'
     }
 
@@ -27,7 +23,20 @@ function grabIssues(org, repo) {
         }).on('end', () => {
             let data = Buffer.concat(chunks);
             let results = JSON.parse(data);
-            console.log(results)
+            let issues = [];
+            // console.log(results)
+            for (let i = 0; i < results.length; i++) {
+                let issue = results[i]
+                let issueData = {
+                    title: issue.title,
+                    submitter: issue.user.login,
+                    url: issue.html_url,
+                    created: issue.created_at,
+                    state: issue.state
+                }
+                newArr.push(issueData)
+                console.log(issueData.title, issueData.state)
+            }
         }).on('error', (e) => {
             console.error(e);
         })
@@ -35,3 +44,7 @@ function grabIssues(org, repo) {
 }
 
 module.exports = { grabIssues }
+
+
+let newArr = []
+
