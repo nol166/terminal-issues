@@ -1,4 +1,5 @@
 const cli = require('commander');
+const figlet = require('figlet')
 const add = require('./src/add');
 const list = require('./src/list');
 const grab = require('./src/grab');
@@ -21,6 +22,19 @@ cli
     .alias('g')
     .description('get issues for a specific repository')
     .action(() => grab.grabIssues(process.argv[3], process.argv[4]))
+
+if (!process.argv[2]) {
+    figlet('Terminal Issues', function (err, data) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+        console.log(data)
+        cli.help();
+    });
+    // cli.help()
+}
 
 cli.parse(process.argv)
 

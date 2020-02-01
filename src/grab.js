@@ -13,9 +13,6 @@ function grabIssues(org, repo) {
     }
 
     https.get(options, (res) => {
-        // console.log('statusCode:', res.statusCode);
-        // console.log('headers:', res.headers);
-        // console.log('headers:', res.data);
         let chunks = []
 
         res.on('data', (d) => {
@@ -35,7 +32,7 @@ function grabIssues(org, repo) {
                     created: issue.created_at,
                     state: issue.state
                 }
-                console.log(issueData.title + " (" + issueData.link + ")")
+                console.log(issueData.title + " (" + chalk.red(issueData.link) + ")")
             }
         }).on('error', (e) => {
             console.error(e);
