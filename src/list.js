@@ -1,6 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const grab = require('./grab');
+const clear = require('clear');
+
 
 
 let repos = []
@@ -14,6 +16,7 @@ module.exports = () => {
         json.forEach(repo => {
             repos.push(repo.repo)
         });
+        clear()
         inquirer
             .prompt({ type: 'list', name: 'repoChoice', message: 'Choose saved repo', choices: repos })
             .then(function (choice) {

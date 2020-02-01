@@ -1,5 +1,6 @@
 const https = require('https');
 const chalk = require('chalk');
+const clear = require('clear')
 
 function grabIssues(org, repo) {
     let options = {
@@ -19,6 +20,7 @@ function grabIssues(org, repo) {
             // push data into an array
             chunks.push(d)
         }).on('end', () => {
+            clear()
             let data = Buffer.concat(chunks);
             let results = JSON.parse(data);
             let issues = [];
@@ -32,7 +34,8 @@ function grabIssues(org, repo) {
                     created: issue.created_at,
                     state: issue.state
                 }
-                console.log(issueData.title + " (" + chalk.red(issueData.link) + ")")
+                let output = issueData.title + " (" + chalk.red(issueData.link) + ")"
+                console.log(output)
             }
         }).on('error', (e) => {
             console.error(e);

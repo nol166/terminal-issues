@@ -3,6 +3,7 @@ const figlet = require('figlet')
 const add = require('./src/add');
 const list = require('./src/list');
 const grab = require('./src/grab');
+var clear = require('clear');
 
 
 cli
@@ -24,6 +25,7 @@ cli
     .action(() => grab.grabIssues(process.argv[3], process.argv[4]))
 
 if (!process.argv[2]) {
+    clear()
     figlet('Terminal Issues', function (err, data) {
         if (err) {
             console.log('Something went wrong...');
