@@ -35,7 +35,6 @@ if (!process.argv[2]) {
         console.log(data)
         cli.help();
     });
-    // cli.help()
 }
 
 cli.parse(process.argv)
