@@ -1,4 +1,5 @@
 const https = require('https');
+const chalk = require('chalk');
 
 function grabIssues(org, repo) {
     let options = {
@@ -30,12 +31,11 @@ function grabIssues(org, repo) {
                 let issueData = {
                     title: issue.title,
                     submitter: issue.user.login,
-                    url: issue.html_url,
+                    link: issue.html_url,
                     created: issue.created_at,
                     state: issue.state
                 }
-                newArr.push(issueData)
-                console.log(issueData.title, issueData.state)
+                console.log(issueData.title + " (" + issueData.link + ")")
             }
         }).on('error', (e) => {
             console.error(e);
@@ -44,7 +44,3 @@ function grabIssues(org, repo) {
 }
 
 module.exports = { grabIssues }
-
-
-let newArr = []
-

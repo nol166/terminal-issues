@@ -17,16 +17,11 @@ cli
     .action(() => list())
 
 cli
-    .command('grab')
+    .command('grab <organization> <repository>')
     .alias('g')
     .description('get issues for a specific repository')
-    .action(() => grab())
+    .action(() => grab.grabIssues(process.argv[3], process.argv[4]))
 
 cli.parse(process.argv)
-
-// if (cli.add) console.log(cli.add());
-// if (cli.list) console.log('- list');
-// if (cli.format) console.log(`- format`);
-// if (cli.get) console.log(`- get issues`);
 
 
