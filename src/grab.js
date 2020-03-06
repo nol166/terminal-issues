@@ -9,7 +9,7 @@ function grabIssues(org, repo) {
         headers: {
             'User-agent': 'terminal-isssues'
         },
-        path: '/repos/' + org + '/' + repo + "/issues",
+        path: `/repos/${org}/${repo}/issues`,
         method: 'GET'
     }
 
@@ -23,8 +23,6 @@ function grabIssues(org, repo) {
             clear()
             let data = Buffer.concat(chunks);
             let results = JSON.parse(data);
-            let issues = [];
-            // console.log(results)
             for (let i = 0; i < results.length; i++) {
                 let issue = results[i]
                 let issueData = {

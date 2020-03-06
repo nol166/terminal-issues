@@ -1,7 +1,6 @@
 const https = require('https');
 const moment = require('moment');
 const chalk = require('chalk');
-const clear = require('clear');
 
 const pulls = (org, repo) => {
     let options = {
@@ -10,7 +9,7 @@ const pulls = (org, repo) => {
         headers: {
             'User-agent': 'terminal-isssues'
         },
-        path: '/repos/' + org + '/' + repo + "/pulls",
+        path: `/repos/${org}/${repo}/pulls`,
         method: 'GET'
     }
 
@@ -30,10 +29,11 @@ const pulls = (org, repo) => {
                     number: pullData.number,
                     state: pullData.state,
                     user: pullData.user.login,
-                    created: pullData.created_at,
-                    updated: pullData.updated_at,
                     branch: pullData.base.ref
                 }
+                pull.created_at = moment(pullData.created_at).format('MMMM Do YYYY, h:mm:ss a')
+                pull.updated_at = moment(pullData.updated_at).format('MMMM Do YYYY, h:mm:ss a')
+
                 console.log(pull)
             }
         }).on('error', (e) => {
@@ -42,6 +42,5 @@ const pulls = (org, repo) => {
     })
 }
 
-pulls("pi-hole", "pi-hole")
 
-module.exports = { pulls: pulls }
+module.exports = { pulls }
