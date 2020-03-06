@@ -3,6 +3,7 @@ const figlet = require('figlet')
 const add = require('./src/add');
 const list = require('./src/list');
 const grab = require('./src/grab');
+const pulls = require('./src/pulls');
 var clear = require('clear');
 
 
@@ -17,6 +18,12 @@ cli
     .alias('l')
     .description('list saved repositories')
     .action(() => list())
+
+// cli
+//     .command('pulls')
+//     .alias('p')
+//     .description('list open pull requests for a specific repo')
+//     .action(() => pulls())
 
 cli
     .command('grab <organization> <repository>')
